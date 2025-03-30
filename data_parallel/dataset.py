@@ -33,12 +33,15 @@ class DataPartitioner():
         # BEGIN SOLUTION
         indices = list(range(len(self.data)))
         indices = rng.shuffle(indices)
-        while len(sizes) > 1:
-            size = sizes.pop(0)
-            end = int(size * len(indices))
-            self.partitions.append(indices[:end])
-            indices = indices[end:]
-        self.partitions.append(indices)
+        i = 0 # start index for partition
+        for size in sizes:
+            j = int(i + size * len(self.data))
+            self.partitions.append(indices[i:j])
+            i = j # update start index for next partition
+    
+        
+
+
 
         # END SOLUTION
 
